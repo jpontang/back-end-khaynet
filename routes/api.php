@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Captcha\CaptchaController;
+use App\Http\Controllers\Siswa\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +34,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
 });
 
 Route::get('captcha', [CaptchaController::class,'index' ])->name('captcha.index');
+Route::post('CariSiswa',[SiswaController::class, 'CariSiswa'])->name('CariSiswa');
 
 //Route::apiResource('roles', RoleController::class)->middleware('auth:sanctum');
