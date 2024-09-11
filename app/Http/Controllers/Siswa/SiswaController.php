@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use DB;
 
 class SiswaController extends Controller
@@ -51,6 +52,12 @@ class SiswaController extends Controller
             ->select('siswa.*','unit_sekolah.*')
             ->limit(1)->get();
             
+           $user =  DB::connection('mysql')->table('users')->where('email','=', $email)->limit(1)->get();
+           if (!$user->isEmpty()) {
+             $userEmpty = 1; //data tersedia
+           }else{
+                $userEmpty = 0;//data kosong
+           }
             /**  
          * Selection data siswa atau data walas
          * ==================================================================================================*/
@@ -71,7 +78,8 @@ class SiswaController extends Controller
            'email' => $email,
            'nama_unit' =>$nama_unit,
            'hp' => $hp,
-           'level_role' => 3
+           'level_role' => 3,
+           'userEmpty' => $userEmpty
            ]);
 
 
