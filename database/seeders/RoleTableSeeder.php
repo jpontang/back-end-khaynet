@@ -23,7 +23,7 @@ class RoleTableSeeder extends Seeder
             'level' => 'admin'
         ]);
 
-       // $role = Role::create(['name' => 'admin']);
+        $role = Role::create(['name' => 'admin']);
 
         $permissions = Permission::pluck('id','id')->all();
 
