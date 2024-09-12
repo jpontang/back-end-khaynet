@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Captcha\CaptchaController;
 use App\Http\Controllers\Siswa\SiswaController;
+use App\Http\Controllers\Role\HasUserSiswaControlle;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::middleware(['auth:sanctum'])->group(function(){
     });
 
     Route::apiResource('roles', RoleController::class);
+    Route::apiResources([        
+        'hasUserSiswa'=>HasUserSiswaControlle::class
+    ]);
+
 });
 
 Route::get('captcha', [CaptchaController::class,'index' ])->name('captcha.index');
