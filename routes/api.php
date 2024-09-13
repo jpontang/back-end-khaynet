@@ -33,7 +33,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::apiResource('roles', RoleController::class);
     Route::apiResources([        
-        'hasUserSiswa'=>HasUserSiswaControlle::class
+        'hasUserSiswa'=>HasUserSiswaControlle::class,
+        'siswa' => SiswaController::class,
     ]);
 
 });

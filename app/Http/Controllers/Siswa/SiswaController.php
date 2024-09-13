@@ -124,7 +124,33 @@ class SiswaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $siswa = DB::connection('mysql2_siak')->table('siswa')
+            ->join('unit_sekolah','siswa.kd_unit','=','unit_sekolah.kode_unit')
+            ->Where("siswa.nomor_induk","=",$id )
+            ->select('siswa.*','unit_sekolah.*')
+            ->limit(1)->get();
+
+        $data_tunggakan = DB::connection('mysql2_siak')->table('tagihan')
+            ->leftjoin('detil_tagihan', 'tagihan.id_record_tagihan','=','detil_tagihan.id_record_tagihan')
+            ->leftjoin('rombel', 'tagihan.nomor_induk','=','rombel.nomor_induk')
+            ->leftjoin('kelas', 'rombel.id_kelas','=','kelas.id_kelas')
+            ->select(
+              DB::raw('tagihan.nomor_induk, tagihan.nama'),
+              DB::raw('kelas.nama_kelas'),
+              DB::raw('SUM(tagihan.total_nilai_tagihan) as total'),
+              DB::raw("(GROUP_CONCAT(detil_tagihan.label_jenis_biaya_panjang SEPARATOR ', ')) as `Rincian`")
+              )
+            ->where('rombel.nomor_induk',$id)
+           ->where('tagihan.is_tagihan_aktif',1)
+           ->groupBY('tagihan.nomor_induk','tagihan.nama','kelas.nama_kelas')
+           ->get();
+
+            $data_siswa['siswa'] = $siswa;
+            $data_siswa['tagihan_siswa'] = $data_tunggakan;
+
+            return response()->json(['status' => 200,
+            'data' => $data_siswa
+            ]);
     }
 
     /**
