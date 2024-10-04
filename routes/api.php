@@ -6,6 +6,7 @@ use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Captcha\CaptchaController;
 use App\Http\Controllers\Siswa\SiswaController;
 use App\Http\Controllers\Role\HasUserSiswaControlle;
+use App\Http\Controllers\TokenOTP\PasswordResetTokensController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,11 +36,14 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::apiResources([        
         'hasUserSiswa'=>HasUserSiswaControlle::class,
         'siswa' => SiswaController::class,
+        'passwordResetToken' => PasswordResetTokensController::class,
     ]);
 
 });
 
 Route::get('captcha', [CaptchaController::class,'index' ])->name('captcha.index');
 Route::post('CariSiswa',[SiswaController::class, 'CariSiswa'])->name('CariSiswa');
-
+Route::apiResources([ 
+    'passwordResetToken' => PasswordResetTokensController::class,
+]);
 //Route::apiResource('roles', RoleController::class)->middleware('auth:sanctum');
