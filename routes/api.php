@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
 Route::get('captcha', [CaptchaController::class,'index' ])->name('captcha.index');
 Route::post('CariSiswa',[SiswaController::class, 'CariSiswa'])->name('CariSiswa');
 Route::apiResources([ 
-    'passwordResetToken' => PasswordResetTokensController::class,
+    'passwordResetToken' => PasswordResetTokensController::class,    
 ]);
+Route::post('cekTokenPasswordReset', [PasswordResetTokensController::class, 'cekTokenReset'])->name('cekTokenPasswordReset');
 //Route::apiResource('roles', RoleController::class)->middleware('auth:sanctum');

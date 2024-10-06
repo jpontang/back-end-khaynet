@@ -126,11 +126,13 @@ class SiswaController extends Controller
     {
         $siswa = DB::connection('mysql2_siak')->table('siswa')
             ->join('unit_sekolah','siswa.kd_unit','=','unit_sekolah.kode_unit')
+            ->leftjoin('rombel', 'siswa.nomor_induk','=','rombel.nomor_induk')
+            ->leftjoin('kelas', 'rombel.id_kelas','=','kelas.id_kelas')
             ->Where("siswa.nomor_induk","=",$id )
-            ->select('siswa.*','unit_sekolah.*')
+            ->select('siswa.*','unit_sekolah.*','kelas.nama_kelas')
             ->limit(1)->get();
 
-        $data_tunggakan = DB::connection('mysql2_siak')->table('tagihan')
+        $data_tunggakanAll = DB::connection('mysql2_siak')->table('tagihan')
             ->leftjoin('detil_tagihan', 'tagihan.id_record_tagihan','=','detil_tagihan.id_record_tagihan')
             ->leftjoin('rombel', 'tagihan.nomor_induk','=','rombel.nomor_induk')
             ->leftjoin('kelas', 'rombel.id_kelas','=','kelas.id_kelas')
@@ -138,15 +140,31 @@ class SiswaController extends Controller
               DB::raw('tagihan.nomor_induk, tagihan.nama'),
               DB::raw('kelas.nama_kelas'),
               DB::raw('SUM(tagihan.total_nilai_tagihan) as total'),
-              DB::raw("(GROUP_CONCAT(detil_tagihan.label_jenis_biaya_panjang SEPARATOR ', ')) as `Rincian`")
+              DB::raw("(GROUP_CONCAT(detil_tagihan.label_jenis_biaya_panjang SEPARATOR ', ')) as `rincian`")
               )
             ->where('rombel.nomor_induk',$id)
            ->where('tagihan.is_tagihan_aktif',1)
            ->groupBY('tagihan.nomor_induk','tagihan.nama','kelas.nama_kelas')
            ->get();
 
+           $data_tunggakanSpp = DB::connection('mysql2_siak')->table('tagihan')
+            ->leftjoin('detil_tagihan', 'tagihan.id_record_tagihan','=','detil_tagihan.id_record_tagihan')
+            ->leftjoin('rombel', 'tagihan.nomor_induk','=','rombel.nomor_induk')
+            ->leftjoin('kelas', 'rombel.id_kelas','=','kelas.id_kelas')
+            ->select(
+              DB::raw('tagihan.nomor_induk, tagihan.nama'),
+              DB::raw('kelas.nama_kelas'),
+              DB::raw('SUM(tagihan.total_nilai_tagihan) as total'),
+              DB::raw("(GROUP_CONCAT(detil_tagihan.label_jenis_biaya_panjang SEPARATOR ', ')) as `rincian`")
+              )
+            ->where('rombel.nomor_induk',$id)
+           ->where('tagihan.is_tagihan_aktif',1)
+           ->where('tagihan.nomor_pembayaran','like','2%')
+           ->groupBY('tagihan.nomor_induk','tagihan.nama','kelas.nama_kelas')
+           ->get();
+
             $data_siswa['siswa'] = $siswa;
-            $data_siswa['tagihan_siswa'] = $data_tunggakan;
+            $data_siswa['tagihanAll_siswa'] = $data_tunggakanAll;
 
             return response()->json(['status' => 200,
             'data' => $data_siswa
