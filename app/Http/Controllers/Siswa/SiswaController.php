@@ -132,6 +132,19 @@ class SiswaController extends Controller
             ->select('siswa.*','unit_sekolah.*','kelas.nama_kelas')
             ->limit(1)->get();
 
+        $data_tunggakan = DB::connection('mysql2_siak')->table('tagihan')
+            ->leftjoin('detil_tagihan', 'tagihan.id_record_tagihan','=','detil_tagihan.id_record_tagihan')
+            ->leftjoin('rombel', 'tagihan.nomor_induk','=','rombel.nomor_induk')
+            ->leftjoin('kelas', 'rombel.id_kelas','=','kelas.id_kelas')
+            ->select(
+              DB::raw('tagihan.*'),
+              DB::raw('kelas.nama_kelas'),
+              DB::raw('detil_tagihan.*'),
+              )
+            ->where('rombel.nomor_induk',$id)
+           ->where('tagihan.is_tagihan_aktif',1)
+           ->get();
+
         $data_tunggakanAll = DB::connection('mysql2_siak')->table('tagihan')
             ->leftjoin('detil_tagihan', 'tagihan.id_record_tagihan','=','detil_tagihan.id_record_tagihan')
             ->leftjoin('rombel', 'tagihan.nomor_induk','=','rombel.nomor_induk')
@@ -164,6 +177,7 @@ class SiswaController extends Controller
            ->get();
 
             $data_siswa['siswa'] = $siswa;
+            $data_siswa['tagihan_siswa'] = $data_tunggakan;
             $data_siswa['tagihanAll_siswa'] = $data_tunggakanAll;
             $data_siswa['tagihanSub_siswa'] = $data_subTunggakan;
 
