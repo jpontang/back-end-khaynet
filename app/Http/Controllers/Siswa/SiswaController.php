@@ -137,12 +137,13 @@ class SiswaController extends Controller
             ->leftjoin('rombel', 'tagihan.nomor_induk','=','rombel.nomor_induk')
             ->leftjoin('kelas', 'rombel.id_kelas','=','kelas.id_kelas')
             ->select(
-              DB::raw('tagihan.*'),
+              DB::raw('tagihan.nama,tagihan.nomor_pembayaran,tagihan.is_tagihan_aktif,tagihan.total_nilai_tagihan'),
               DB::raw('kelas.nama_kelas'),
-              DB::raw('detil_tagihan.*'),
+              DB::raw('detil_tagihan.kode_jenis_biaya,detil_tagihan.label_jenis_biaya_panjang'),
               )
             ->where('rombel.nomor_induk',$id)
-           ->where('tagihan.is_tagihan_aktif',1)
+            ->orderby('urutan_antrian','desc')
+            //->limit(10)
            ->get();
 
         $data_tunggakanAll = DB::connection('mysql2_siak')->table('tagihan')
