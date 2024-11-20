@@ -17,7 +17,7 @@ class WhatsappController extends Controller
             //--------------------------------------------------------------------------------------
             $dataSending = Array();
             $dataSending["api_key"] = "BSJLT4IHU9TDWHQE";
-            $dataSending["number_key"] = "9dKV8HxHzE6mTB30";
+            $dataSending["number_key"] = "8OHUynjulvKxNNhN";
             $dataSending["phone_no"] = $no_hp;
             $dataSending["message"] = $pesan;
             $curl = curl_init();

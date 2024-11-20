@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Captcha\CaptchaController;
 use App\Http\Controllers\Siswa\SiswaController;
+use App\Http\Controllers\Siswa\PermohonanController;
+use App\Http\Controllers\Siswa\JadwalController;
 use App\Http\Controllers\Role\HasUserSiswaControlle;
 use App\Http\Controllers\TokenOTP\PasswordResetTokensController;
 
@@ -36,8 +38,12 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::apiResources([        
         'hasUserSiswa'=>HasUserSiswaControlle::class,
         'siswa' => SiswaController::class,
+        'jadwal' => JadwalController::class,
         'passwordResetToken' => PasswordResetTokensController::class,
     ]);
+
+    Route::post('cekPermohonan', [PermohonanController::class, 'cekPermohonan'])->name('cekPermohonan');
+
 
 });
 
@@ -46,5 +52,6 @@ Route::post('CariSiswa',[SiswaController::class, 'CariSiswa'])->name('CariSiswa'
 Route::apiResources([ 
     'passwordResetToken' => PasswordResetTokensController::class,    
 ]);
+
 Route::post('cekTokenPasswordReset', [PasswordResetTokensController::class, 'cekTokenReset'])->name('cekTokenPasswordReset');
 //Route::apiResource('roles', RoleController::class)->middleware('auth:sanctum');
