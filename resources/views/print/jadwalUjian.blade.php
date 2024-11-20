@@ -42,12 +42,8 @@
 		<table style="width:100%">
 			<tr>
 				<th style="width:20%"><center>
-							@php
-							$image = public_path('old_assets/img/logo_istiqomah.png');
-							$imageData = base64_encode(file_get_contents($image));
-							$src = 'data:' . mime_content_type($image). ';base64,'.$imageData;
-							@endphp
-							<img src="{{$src}}" height="100" />
+							
+							<img src="#" height="100" />
 				</th>
 				<th style="width:80%">
 						<h3 style="margin: -1px">YAYASAN PENDIDIKAN INSAN ISTIQOMAH</h3>
@@ -61,16 +57,16 @@
 	</header>
 	<section>
 		<center>
-		<h4><strong>DATA CALON SISWA JALUR MANDIRI</strong></h4>
+		<h4><strong>JADWAL UJIAN SEKOLAH</strong></h4>
 		</center>
 		@foreach($siswa as $s)
 		<table class="left" style="width:100%">
 			<tr>
 				<th class="left" style="width:30%">	
-				Nomor	
+				Nomor Induk	
 				</th>
 				<th class="left"  style="width:80%">	
-					: {{$s->nomor_induk}}		
+					: 	 {{$s->nomor_induk}}
 				</th>
 			</tr>
 			<tr>
@@ -78,45 +74,44 @@
 					Nama Lengkap		
 				</th>
 				<th class="left"  style="width:80%">	
-					: {{$s->nm_lengkap}}			
+					: 	{{$s->nm_siswa}}		
 				</th>
 			</tr>
 			<tr>
 				<th class="left" style="width:30%">	
-					Jenis Kelamin			
-				</th>
-				<th class="left" style="width:80%">	
-					: {{$s->kelamin}}		
-				</th>
-			</tr>
-			<tr>
-				<th class="left" style="width:30%">	
-					Tanggal Lahir</p>				
-				</th>
-				<th class="left" style="width:80%">	
-					: {{$s->tgl_lahir}}		
-				</th>
-			</tr>
-			<tr>
-				<th class="left" style="width:30%">	
-					Asal Sekolah			
-				</th>
-				<th class="left" style="width:80%">	
-					: {{$s->asal_sekolah}}
-				</th>
-			</tr>
-			<tr>
-				<th class="left" style="width:30%">	
-					Pilihan Sekolah Tujuan				
+					Sekolah			
 				</th>
 				<th class="left" style="width:80%">	
 					: {{$s->nama_unit}}
+				</th>
+			</tr>
+			<tr>
+				<th class="left" style="width:30%">	
+					Kelas				
+				</th>
+				<th class="left" style="width:80%">	
+					: {{$s->nama_kelas}}
 				</th>
 			</tr>
 			
 		</table>
 		@endforeach
 	</section>
+	<section>
+	{{$jadwal}}
+	@foreach($jadwal as $j)
+		<table class="left" style="width:100%,border:1px">
+		<tr>
+			<th>Hari</th>
+			<th>Savings</th>
+		</tr>
+		<tr>
+			<td>{{$j->hari}}</td>
+			<td style="text-align:right">$100</td>
+		</tr>			
+		</table>
+		@endforeach
+	</selection>
 
 	<section>        
 					<div class="row">

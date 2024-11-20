@@ -8,6 +8,7 @@ use App\Http\Controllers\Siswa\SiswaController;
 use App\Http\Controllers\Siswa\PermohonanController;
 use App\Http\Controllers\Siswa\JadwalController;
 use App\Http\Controllers\Role\HasUserSiswaControlle;
+use App\Http\Controllers\Export\PDFController;
 use App\Http\Controllers\TokenOTP\PasswordResetTokensController;
 
 /*
@@ -40,6 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
         'siswa' => SiswaController::class,
         'jadwal' => JadwalController::class,
         'passwordResetToken' => PasswordResetTokensController::class,
+        'PDFexport' => PDFController::class,
     ]);
 
     Route::post('cekPermohonan', [PermohonanController::class, 'cekPermohonan'])->name('cekPermohonan');
