@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>YPI INSAN ISTIQOMAH| Bukti PMB </title>
+        <title>YPI INSAN ISTIQOMAH| Kartu ujian </title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 		   
         <!-- AdminLTE App -->
@@ -35,6 +36,9 @@
 			th.justify {
 			text-align: justify;
 			} 
+			.border {
+				border: 1px;
+			}
 		</style>
     </head>
     <body>
@@ -48,8 +52,7 @@
 				<th style="width:80%">
 						<h3 style="margin: -1px">YAYASAN PENDIDIKAN INSAN ISTIQOMAH</h3>
 							<h2 style="margin: -1px">TKIT/MI/SDIT AL ISTIQOMAH</h2>
-							<p style="font-size:12px">Sekretariat : Rakha Insan Istiqomah Jl Sawo Raya No. 1 Telp. 021-5911784<br>
-							TKIT 1.(5913802), TKIT2. (5913591), MI/SDI (5538227), SDIT1 (5913591), SDIT2 (5911784)</p>
+							<p style="font-size:12px">Sekretariat : Rakha Insan Istiqomah Jl Sawo Raya No. 1 Telp. 021-5538227</p>
 				</th></center>
 			</tr>
 			<hr>
@@ -60,7 +63,7 @@
 		<h4><strong>JADWAL UJIAN SEKOLAH</strong></h4>
 		</center>
 		@foreach($siswa as $s)
-		<table class="left" style="width:100%">
+		<table class="left" style="width:100%"  >
 			<tr>
 				<th class="left" style="width:30%">	
 				Nomor Induk	
@@ -97,20 +100,57 @@
 		</table>
 		@endforeach
 	</section>
-	<section>
-	{{$jadwal}}
-	@foreach($jadwal as $j)
-		<table class="left" style="width:100%,border:1px">
-		<tr>
-			<th>Hari</th>
-			<th>Savings</th>
-		</tr>
-		<tr>
-			<td>{{$j->hari}}</td>
-			<td style="text-align:right">$100</td>
-		</tr>			
+	<section class="jadwal">
+		<br>
+	<!-- {{$jadwal}}
+	 -->
+		<table class="left" border="1" style="width:100%">
+			<tr>
+				<th style="width:15%">Hari</th>
+				<th style="width:15%">jam</th>
+				<th style="width:60%">Mata Pelajaran</th>
+				<th style="width:10%">Paraf</th>
+			</tr>
+			@foreach($jadwal as $j)
+			<tr>
+				<td>{{$j->hari}} 
+					{{$j->tgl_ujian}}
+				</td>
+				
+
+				<td>
+				<?php
+					 $arr = $j->soal;
+					//  unset($arr[1]);//
+					$r = json_decode($arr,true);
+					$t = JSON.parse($arr);
+
+					// unset($r[1]);
+					
+
+						// $jsonobj = '[{"Peter":35,"Ben":37},{"k":35,"B":37}]';
+						
+						// var_dump(json_decode($jsonobj));
+						
+					?>
+					
+				
+					
+					</td>
+				<td>{{$arr}}</td>
+				<td></td>			
+			</tr>	
+			@endforeach		
 		</table>
-		@endforeach
+		
+		<br>
+		<p id="demo"></p>
+
+				<script>
+				var obj = JSON.parse('{"firstName":"Johnsss", "lastName":"Doe"}');
+
+				document.getElementById("demo").innerHTML = obj.firstName;
+				</script>
 	</selection>
 
 	<section>        
@@ -120,9 +160,9 @@
 						</div>
 						<div class="col-xs-6">
 							<ol>
-								<li>Kartu Tanda Bukti tidak boleh Hilang / Rusak</li>
-								<li>Kartu ini harus dibawa saat Observasi</li>
-								<li>Kartu Tanda Bukti ini digunakan untuk DAFTAR ULANG</li>
+								<li>Kartu jadwal ujian tidak boleh Hilang / Rusak</li>
+								<li>Kartu ini harus dibawa saat ujian berlansung</li>
+								<li>Kartu jadwal ujian ini digunakan untuk paraf absensi selama ujian berlangsung</li>
 							</ol>
 						</div>
 						<div class="col-xs-4 text-center">
