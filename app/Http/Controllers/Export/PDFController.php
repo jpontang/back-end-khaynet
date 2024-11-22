@@ -44,14 +44,14 @@ class PDFController extends Controller
             $dataBankSoal =  DB::connection('mysql3_myistiqomah')->table('bank_soal')
             ->where('id_tingkatan',$id_tingkatan )
             ->whereIn('kd_unit', $unit)
-            ->select(
+            ->select('judul',
                 DB::raw("DATE_FORMAT(waktu_mulai, '%W') hari"),
                 DB::raw("DATE(waktu_mulai) tgl_ujian"),
-                DB::raw("JSON_ARRAYAGG(JSON_OBJECT('jd',bank_soal.judul,'wkt',TIME_FORMAT(bank_soal.waktu_ujian, '%H:%i:%s'))) as  soal")
+                DB::raw("TIME_FORMAT(bank_soal.waktu_ujian, '%H:%i') wkt")
+                // DB::raw("JSON_ARRAYAGG(JSON_OBJECT('jd',bank_soal.judul,'wkt',TIME_FORMAT(bank_soal.waktu_ujian, '%H:%i:%s'))) as  soal")
                 // DB::raw("JSON_ARRAYAGG(JSON_OBJECT('jd',bank_soal.judul ,'wkt',bank_soal.waktu_ujian)) as  soal")
                 )
             ->orderBy('waktu_mulai', 'asc')
-            ->groupBy('waktu_mulai') 
             ->get();
             }else{
             $dataBankSoal =  DB::connection('mysql3_myistiqomah')->table('bank_soal')
