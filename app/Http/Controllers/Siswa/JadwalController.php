@@ -49,6 +49,7 @@ class JadwalController extends Controller
                 // DB::raw("JSON_ARRAYAGG(JSON_OBJECT('jd',bank_soal.judul ,'wkt',bank_soal.waktu_ujian)) as  soal")
                 )
             ->orderBy('waktu_mulai', 'asc')
+            ->orderBy('waktu_ujian', 'asc')
             ->groupBy('waktu_mulai') 
             ->get()->toArray();
             }else{
@@ -61,6 +62,7 @@ class JadwalController extends Controller
                 DB::raw("JSON_ARRAYAGG(JSON_OBJECT('jd',bank_soal.judul,'wkt',TIME_FORMAT(bank_soal.waktu_ujian, '%H:%i'))) as  soal")
                 )
             ->orderBy('waktu_mulai', 'asc')
+            ->orderBy('waktu_ujian', 'asc')
             ->groupBy('waktu_mulai')            
             ->get()->toArray();
         }
