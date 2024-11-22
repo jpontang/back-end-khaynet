@@ -60,7 +60,7 @@ class PDFController extends Controller
             ->select('waktu_mulai as tgl_mulai',
                 DB::raw("DATE_FORMAT(waktu_mulai, '%W') hari"),
                 DB::raw("DATE(waktu_mulai) tgl_ujian"),
-                DB::raw("JSON_ARRAYAGG(JSON_OBJECT('jd',bank_soal.judul,'wkt',TIME_FORMAT(bank_soal.waktu_ujian, '%H:%i:%s'))) as  soal")
+                // DB::raw("JSON_ARRAYAGG(JSON_OBJECT('jd',bank_soal.judul,'wkt',TIME_FORMAT(bank_soal.waktu_ujian, '%H:%i:%s'))) as  soal")
                 )
             ->orderBy('waktu_mulai', 'asc')
             ->groupBy('waktu_mulai')            
