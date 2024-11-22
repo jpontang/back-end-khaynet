@@ -64,7 +64,7 @@ class PDFController extends Controller
                 // DB::raw("JSON_ARRAYAGG(JSON_OBJECT('jd',bank_soal.judul,'wkt',TIME_FORMAT(bank_soal.waktu_ujian, '%H:%i:%s'))) as  soal")
                 )
             ->orderBy('waktu_mulai', 'asc')
-            ->groupBy('waktu_mulai')            
+            // ->groupBy('waktu_mulai')            
             ->get();
         }
 
