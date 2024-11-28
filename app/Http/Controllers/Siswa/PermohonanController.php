@@ -10,11 +10,11 @@ use DB;
 
 class PermohonanController extends Controller
 {
-    public function cekPermohonan(Request $req){
+    public function show(string $id){
 
         ///*** cek Apakah Ada stimulus //  
     $getCekPermohonan = DB::connection('mysql2_siak')->table('permohonan')
-    ->where('nomor_induk',$req->nomor_induk)
+    ->where('nomor_induk',$id)
     ->where('is_status_aktif',1)
     ->orderBy('created_at','DESC')
     ->limit(1)->get();

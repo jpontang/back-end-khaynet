@@ -42,9 +42,10 @@ Route::middleware(['auth:sanctum'])->group(function(){
         'jadwal' => JadwalController::class,
         'passwordResetToken' => PasswordResetTokensController::class,
         'PDFexport' => PDFController::class,
+        'cekPermohonan' =>PermohonanController::class,
     ]);
 
-    Route::post('cekPermohonan', [PermohonanController::class, 'cekPermohonan'])->name('cekPermohonan');
+   // Route::post('cekPermohonan', [PermohonanController::class, 'cekPermohonan'])->name('cekPermohonan');
 
 
 });
