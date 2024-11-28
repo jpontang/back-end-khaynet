@@ -144,7 +144,6 @@
 				<td ></td>					
 			</tr>
 			
-			
 			@endforeach	
 
 				
@@ -165,6 +164,9 @@
 						<div class="col-xs-4 text-center">							
 							<strong>Mengetahu,</strong>	
 							<strong>KEPSEK</strong>	
+							<br>
+							<br>
+							<strong>(......................)</strong>	
 						</div>
 					</div>
             </section>       
