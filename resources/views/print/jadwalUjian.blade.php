@@ -163,7 +163,8 @@
 							</ol>
 						</div>
 						<div class="col-xs-4 text-center">							
-							<strong>jadwal</strong>	
+							<strong>Mengetahu,</strong>	
+							<strong>KEPSEK</strong>	
 						</div>
 					</div>
             </section>       
