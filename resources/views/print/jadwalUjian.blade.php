@@ -163,7 +163,7 @@
 							</ol>
 						</div>
 						<div class="col-xs-4 text-center">							
-							<strong></strong>	
+							<strong>jadwal</strong>	
 						</div>
 					</div>
             </section>       
