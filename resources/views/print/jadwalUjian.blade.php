@@ -163,7 +163,11 @@
 							</ol>
 						</div>
 						<div class="col-xs-4 text-center">							
-							<strong></strong>	
+							<strong>Mengetahu,</strong>	
+							<strong>Kepala Sekoah,{{$s->nama_unit}}</strong>	
+							<br>
+							<br>
+							<strong>(....................)</strong>	
 						</div>
 					</div>
             </section>       
