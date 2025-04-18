@@ -24,7 +24,6 @@ class User extends Authenticatable
         'email',
         'password',
         'level',
-        'nomor_induk',
     ];
 
     /**
