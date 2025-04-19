@@ -10,6 +10,7 @@ use App\Http\Controllers\Siswa\JadwalController;
 use App\Http\Controllers\Role\HasUserSiswaControlle;
 use App\Http\Controllers\Export\PDFController;
 use App\Http\Controllers\TokenOTP\PasswordResetTokensController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     });
 
     Route::apiResource('roles', RoleController::class);
-    Route::apiResources([        
+    Route::apiResources([
+        'DataUser'=>UserController::class,
         'hasUserSiswa'=>HasUserSiswaControlle::class,
         'siswa' => SiswaController::class,
         'jadwal' => JadwalController::class,
@@ -52,8 +54,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
 Route::get('captcha', [CaptchaController::class,'index' ])->name('captcha.index');
 Route::post('CariSiswa',[SiswaController::class, 'CariSiswa'])->name('CariSiswa');
-Route::apiResources([ 
-    'passwordResetToken' => PasswordResetTokensController::class,    
+Route::apiResources([
+    'passwordResetToken' => PasswordResetTokensController::class,
 ]);
 
 Route::post('cekTokenPasswordReset', [PasswordResetTokensController::class, 'cekTokenReset'])->name('cekTokenPasswordReset');
